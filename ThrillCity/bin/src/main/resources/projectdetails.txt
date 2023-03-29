@@ -1,0 +1,82 @@
+Activity{
+id;
+double price;
+age;
+capacity;
+des;
+//list<customer> (we need to get by date)
+}
+
+
+
+Customer extends user{
+id;
+//list<Activity>
+}
+
+
+Ticket{
+id;
+customer c;
+date;
+bal_amount;
+}
+
+abstract
+User{
+name;
+mobile;
+pass;
+}
+
+
+Admin extends User{
+id;
+email;
+address;
+}
+
+
+// one activity many customers
+// one customer many activity  (many to many b/w customer and activity)
+
+// one customer one ticket
+
+
+
+   model
+   service
+   exception
+   repository
+   controller
+   helper(for subclasses that are present in model)
+   
+  ui (last)
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
