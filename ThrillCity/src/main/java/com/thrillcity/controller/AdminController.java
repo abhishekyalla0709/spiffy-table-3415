@@ -41,13 +41,13 @@ public class AdminController {
 		return new ResponseEntity<Admin>(a, HttpStatus.OK);
 	}
 	
-	@PostMapping("/customers")
-	public ResponseEntity<Customer> addCustomer(@RequestBody Customer c){
-		List<Activity> activities = c.getActivities();
-		for(Activity activity: activities) {
-			activity.getCustomers().add(c);
-		}
-		customerRepsoitory.save(c);
-		return new ResponseEntity<>(c, HttpStatus.ACCEPTED);
-	}
+//	@PostMapping("/customers")
+//	public ResponseEntity<Customer> addCustomer(@RequestBody Customer c){
+//		List<Activity> activities = c.getActivities();
+//		for(Activity activity: activities) {
+//			activity.getCustomers().add(c);
+//		}
+//		customerRepsoitory.save(c);
+//		return new ResponseEntity<>(c, HttpStatus.ACCEPTED);
+//	}
 }

@@ -1,5 +1,6 @@
 package com.thrillcity.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,14 +21,15 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
-@Data
-public class Customer extends User{
+public class Customer{
 	
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,17 +38,17 @@ public class Customer extends User{
 		@NotNull
 		private String address;
 		
-		@Size(min = 10, message = "Mobile Number should be of 10 digits!")
+//		@Size(min = 10, message = "Mobile Number should be of 10 digits!")
 		private String mobileNumber;
 		
 		@Email
 		private String email;
 		
-		@OneToOne(cascade = CascadeType.ALL)
-		private Ticket tickets;
+//		@OneToOne(cascade = CascadeType.ALL)
+//		private Ticket tickets;
 		
 		@JsonIgnore
-		@ManyToMany(cascade = CascadeType.ALL, mappedBy = "customers")
-		private List<Activity> activity;
+		@ManyToMany(cascade = CascadeType.ALL)
+		private List<Activity> activities = new ArrayList<>();
 
 }
