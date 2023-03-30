@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.model.Activity;
-import com.thrillcity.repository.ActivityDao;
 
 public interface ActivityService {
 	

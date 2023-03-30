@@ -10,12 +10,13 @@ import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.Customer;
 import com.thrillcity.repository.ActivityDao;
+import com.thrillcity.repository.ActivityRepository;
 
 @Service
 public class ActivityServiceImpl implements ActivityService{
 
 	@Autowired
-	private ActivityDao activityDao;
+	private ActivityRepository activityRepository;
 	
 	@Override
 	public Activity insertActivity(Activity activity) throws ActivityException {
