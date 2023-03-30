@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.thrillcity.model.Activity;
 
 @Repository
-public interface ActivityDao extends JpaRepository<Activity, Integer>{
+public interface ActivityRepository extends JpaRepository<Activity, Integer>{
 	
 	public List<Activity> findByCharges(Double charges);
 }
