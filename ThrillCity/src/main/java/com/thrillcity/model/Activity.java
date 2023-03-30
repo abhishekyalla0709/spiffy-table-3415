@@ -3,6 +3,8 @@ package com.thrillcity.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +29,6 @@ public class Activity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ACTIVITYID")
 	private Integer Activityid;
 	private String description;
 	@Min(value = 100)
@@ -36,7 +37,9 @@ public class Activity{
 	@Min(value = 1)
 	private Integer capacity;
 	
-	@ManyToMany(mappedBy = "activities",cascade = CascadeType.ALL)
+	
+	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "activities")
 	private List<Customer> customers = new ArrayList<>();
+	
 	
 }

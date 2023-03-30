@@ -19,5 +19,5 @@ public class Ticket {
 	
 	private Double balance = 200.0;
 	
-	private LocalDateTime dateTime;
+	private LocalDateTime dateTime = LocalDateTime.now();
 }
