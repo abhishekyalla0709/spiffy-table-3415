@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.masai.exception.CustomerException;
+import com.thrillcity.exceptions.ActivityException;
+import com.thrillcity.exceptions.CustomerException;
+import com.thrillcity.model.Activity;
 import com.thrillcity.model.Customer;
 
 @Service
