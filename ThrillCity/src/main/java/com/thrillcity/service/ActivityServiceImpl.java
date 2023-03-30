@@ -30,11 +30,6 @@ public class ActivityServiceImpl implements ActivityService{
 		Activity activ = activityDao.save(activity);
 		
 		return activ;
-		
-		
-//		Activity activ = activityDao.save(activity);
-		
-//		return activ;
 	}
 
 	@Override
