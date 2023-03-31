@@ -44,8 +44,8 @@ public class Customer{
 		@Email
 		private String email;
 		
-//		@OneToOne(cascade = CascadeType.ALL)
-//		private Ticket tickets;
+		@OneToOne(cascade = CascadeType.ALL)
+		private Ticket tickets;
 		
 		@JsonIgnore
 		@ManyToMany(cascade = CascadeType.ALL)
