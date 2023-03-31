@@ -22,4 +22,12 @@ public class GlobalExceptionHandler {
 		myerrordetails.setDetails(wr.getDescription(false));
 		return new ResponseEntity<MyErrorDetails>(myerrordetails, HttpStatus.NOT_FOUND);
 	}
+	
+	public ResponseEntity<MyErrorDetails> customerException(CustomerException customerException, WebRequest wr){
+		MyErrorDetails myerrordetails = new MyErrorDetails();
+		myerrordetails.setTimeStamp(LocalDateTime.now());
+		myerrordetails.setMsg(customerException.getMessage());
+		myerrordetails.setDetails(wr.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(myerrordetails, HttpStatus.NOT_FOUND);
+	}
 }

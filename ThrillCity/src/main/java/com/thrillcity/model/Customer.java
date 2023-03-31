@@ -1,5 +1,6 @@
 package com.thrillcity.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,6 +45,9 @@ public class Customer{
 		
 		@Email
 		private String email;
+		
+		@Past(message="Please provide valid  date of birth")
+		private LocalDate dob;
 		
 		@OneToOne(cascade = CascadeType.ALL)
 		private Ticket tickets;
