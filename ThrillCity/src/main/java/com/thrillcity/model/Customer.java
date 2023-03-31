@@ -45,8 +45,7 @@ public class Customer{
 		
 		@Email
 		private String email;
-		
-		@Past(message = "date of birth should be in past")
+  
 		private LocalDate dob;
 		
 		@OneToOne(cascade = CascadeType.ALL)
