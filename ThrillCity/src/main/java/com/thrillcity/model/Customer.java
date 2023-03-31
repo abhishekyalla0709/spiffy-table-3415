@@ -1,5 +1,6 @@
 package com.thrillcity.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +43,10 @@ public class Customer extends User{
 		
 		@Email
 		private String email;
+		
+		@NotNull
+		@Past
+		private LocalDate dob;
 		
 		@OneToOne(cascade = CascadeType.ALL)
 		private Ticket tickets;
