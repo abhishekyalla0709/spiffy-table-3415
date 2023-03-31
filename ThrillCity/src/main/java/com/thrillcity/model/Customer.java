@@ -1,5 +1,6 @@
 package com.thrillcity.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,14 +37,17 @@ public class Customer{
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Integer customerID;
 		
-		@NotNull
+		@NotNull(message = "please provide address")
 		private String address;
 		
-//		@Size(min = 10, message = "Mobile Number should be of 10 digits!")
+		@Size(min = 10, message = "Mobile Number should be of 10 digits!")
 		private String mobileNumber;
 		
 		@Email
 		private String email;
+		
+		@Past(message = "date of birth should be in past")
+		private LocalDate dob;
 		
 		@OneToOne(cascade = CascadeType.ALL)
 		private Ticket tickets;
@@ -114,6 +119,15 @@ public class Customer{
 			super();
 			// TODO Auto-generated constructor stub
 		}
+
+		public LocalDate getDob() {
+			return dob;
+		}
+
+		public void setDob(LocalDate dob) {
+			this.dob = dob;
+		}
+		
 		
 		
 		
