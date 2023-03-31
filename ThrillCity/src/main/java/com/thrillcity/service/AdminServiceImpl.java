@@ -11,7 +11,6 @@ import com.thrillcity.exceptions.AdminException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.Admin;
 import com.thrillcity.model.Customer;
-import com.thrillcity.repository.ActivityDao;
 import com.thrillcity.repository.ActivityRepository;
 import com.thrillcity.repository.AdminRepository;
 import com.thrillcity.repository.CustomerRepository;
@@ -26,8 +25,11 @@ public class AdminServiceImpl implements AdminService{
 	private CustomerRepository customerRepository;
 	
 	@Autowired
-	private ActivityDao activityDao;
-
+	private ActivityRepository activityRepository;
+	
+	@Autowired
+	private Activity ac;
+	
 	@Override
 	public Admin insertAdmin(Admin admin) {
 		Admin a = adminRepository.save(admin);
@@ -81,8 +83,8 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Activity> getAllActivities() {
 		// TODO Auto-generated method stub
-		List<Activity> activities = activityDao.findAll();
-		return activities;
+		
+		return null;
 	}
 
 	@Override
