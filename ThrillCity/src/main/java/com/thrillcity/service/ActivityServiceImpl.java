@@ -28,19 +28,19 @@ public class ActivityServiceImpl implements ActivityService{
 			customer.getActivities().add(activity);
 		}
 		
-		Activity activ = activityDao.save(activity);
+		Activity activ = activityRepository.save(activity);
 		
 		return activ;
 	}
 
 	@Override
 	public Activity updateActivity(Activity activity) throws ActivityException {
-		Optional<Activity> opt = activityDao.findById(activity.getActivityid());
+		Optional<Activity> opt = activityRepository.findById(activity.getActivityid());
 		
 		if(opt.isPresent()) {
 			Activity activ = opt.get();
 			
-			activityDao.save(activity);
+			activityRepository.save(activity);
 			
 			return activity;
 		}
@@ -51,7 +51,7 @@ public class ActivityServiceImpl implements ActivityService{
 
 	@Override
 	public List<Activity> viewChargesOfActivities(Double charges) throws ActivityException {
-		List<Activity> activities = activityDao.findByCharges(charges);
+		List<Activity> activities = activityRepository.findByCharges(charges);
 		
 		if(activities.isEmpty()) {
 			throw new ActivityException("There are no activities for a charge of: "+charges);
@@ -69,6 +69,12 @@ public class ActivityServiceImpl implements ActivityService{
 		
 		else return activityDTOs;
 		
+	}
+
+	@Override
+	public Activity deleteActivity(Integer activityId) throws ActivityException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
