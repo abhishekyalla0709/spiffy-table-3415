@@ -6,30 +6,27 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @ToString
 public class Activity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Activityid;
+	private Integer activityid;
 	private String description;
 	@Min(value = 100)
 	private Double charges;
@@ -43,12 +40,12 @@ public class Activity{
 
 
 	public Integer getActivityid() {
-		return Activityid;
+		return activityid;
 	}
 
 
 	public void setActivityid(Integer activityid) {
-		Activityid = activityid;
+		activityid = activityid;
 	}
 
 
@@ -111,7 +108,7 @@ public class Activity{
 	public Activity(Integer activityid, String description, @Min(100) Double charges, Integer age,
 			@Min(1) Integer capacity, List<Customer> customers) {
 		super();
-		Activityid = activityid;
+		activityid = activityid;
 		this.description = description;
 		this.charges = charges;
 		this.age = age;
