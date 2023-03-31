@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.thrillcity.model.Activity;
+import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.service.ActivityService;
 
 @RestController
@@ -30,25 +31,35 @@ public class ActivityController {
 	}
 	
 	@PutMapping("/activities")
-	public ResponseEntity<Activity> updateActivityHandler(Activity activity){
+	public ResponseEntity<Activity> updateActivityHandler(@RequestBody Activity activity){
 		Activity activ = activityService.updateActivity(activity);
+		
 				
 		return new ResponseEntity<>(activ,HttpStatus.OK);
 	}
 	
 	
-	@DeleteMapping("/activities")
-	public ResponseEntity<Activity> deleteActivityHandler(int activityId){
+	@DeleteMapping("/activities/{activityId}")
+	public ResponseEntity<Activity> deleteActivityHandler(@PathVariable Integer activityId){
 		Activity activ = activityService.deleteActivity(activityId);
 		
 		return new ResponseEntity<>(activ,HttpStatus.OK);
 	}
 	
-	@GetMapping("/activities{charges}")
+	@GetMapping("/activities/{charges}")
 	public ResponseEntity<List<Activity>> viewActivitiesByChargesHandler(@PathVariable Double charges){
 		List<Activity> activities = activityService.viewChargesOfActivities(charges);
 		
 		return new ResponseEntity<>(activities,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getActivities")
+	public ResponseEntity<List<ActivityDTO>> getActivDeets(){
+		
+		List<ActivityDTO> activityDTOs = activityService.getAllActivityDetails();
+		
+		return new ResponseEntity<>(activityDTOs,HttpStatus.OK);
+		
 	}
 	
 	

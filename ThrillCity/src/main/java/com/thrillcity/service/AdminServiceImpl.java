@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.AdminException;
+import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.Admin;
 import com.thrillcity.model.Customer;
@@ -26,75 +28,74 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private ActivityRepository activityRepository;
-	
-	
+
 	@Override
-	public Admin insertAdmin(Admin admin) {
+	public Admin insertAdmin(Admin admin) throws AdminException {
 		Admin a = adminRepository.save(admin);
-		// TODO Auto-generated method stub
+		if(a==null) {
+			throw new AdminException("Something went wrong please try again");
+		}
 		return a;
 	}
-	
+
 	@Override
-	public Admin getAdmin(Integer id) {
-		
+	public Admin getAdmin(Integer id) throws AdminException {
 		Optional<Admin> opt = adminRepository.findById(id);
 		if(opt.isPresent()) {
 			Admin admin = opt.get();
 			return admin;
 		}
-		throw new AdminException("not found idiot");
-		
+		throw new AdminException("Admin not found with id " + id);
 	}
 
 	@Override
-	public Admin updateAdmin(Admin admin) {
-		// TODO Auto-generated method stub
-		Admin a = adminRepository.save(admin);
-		return a;
+	public Admin updateAdmin(Admin admin) throws AdminException {
+		Optional<Admin> opt = adminRepository.findById(admin.getAdmin_id());
+		if(opt.isPresent()) {
+			Admin a1 = adminRepository.save(admin);
+			return a1;
+		}
+		throw new AdminException("Admin not found with id " + admin.getAdmin_id());
 	}
 
 	@Override
-	public Admin deleteAdmin(Integer admin_id) {
-		// TODO Auto-generated method stub
+	public Admin deleteAdmin(Integer admin_id) throws AdminException {
+
 		Optional<Admin> opt = adminRepository.findById(admin_id);
 		if(opt.isPresent()) {
-			Admin a = opt.get();
-			adminRepository.delete(a);
-			return a;
+			Admin a1 = opt.get();
+			adminRepository.delete(a1);
+			return a1;
 		}
-		throw new AdminException("admin not found");
+		throw new AdminException("Admin not found with id " + admin_id);
 	}
 
 	@Override
-	public List<Activity> getAllActivities(Integer customer_id) {
-		// TODO Auto-generated method stub
+	public List<Activity> getAllActivities(Integer customer_id) throws ActivityException, CustomerException {
 		Optional<Customer> opt = customerRepository.findById(customer_id);
-		if(opt.isPresent()) {
+		if(opt.isPresent()==false) {
+			throw new CustomerException("customer not found with id " + customer_id);
+		}
+		
 			Customer c = opt.get();
 			List<Activity> activities = c.getActivities();
+			if(activities.size() == 0) {
+				throw new ActivityException("customer has not taken any activity yet");
+			}
 			return activities;
+	}
+
+	@Override
+	public List<Activity> getAllActivities() throws ActivityException {
+		List<Activity> activities = activityRepository.findAll();
+		if(activities.size()==0) {
+			throw new ActivityException("no activity is found");
 		}
-		throw new AdminException("admin not found");
+		return activities;
 	}
 
-	@Override
-	public List<Activity> getAllActivities() {
-		// TODO Auto-generated method stub
-		
-		return null;
-	}
+	
+	
 
-	@Override
-	public List<Activity> getActivitiesDatewise() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Activity> getAllActivitiesForDays(Integer customer_id, LocalDateTime fromDate, LocalDateTime toDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

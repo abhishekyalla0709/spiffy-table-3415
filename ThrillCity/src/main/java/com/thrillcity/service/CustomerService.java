@@ -14,7 +14,5 @@ public interface CustomerService {
 	public Customer updateCustomer(Customer customer) throws CustomerException;
 	public String deleteCustomer(Integer customerID) throws CustomerException;
 	public List<Activity> getAllActivities() throws ActivityException;
-	public Customer getCustomerById(Integer customerId) throws CustomerException;
-	public Activity getCustomerActivity(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException;
 
 }

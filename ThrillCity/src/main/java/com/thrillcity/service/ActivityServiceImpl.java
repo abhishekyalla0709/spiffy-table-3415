@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.model.Activity;
+import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Customer;
 import com.thrillcity.repository.ActivityRepository;
 
@@ -47,10 +48,6 @@ public class ActivityServiceImpl implements ActivityService{
 		else throw new ActivityException("Entered ActivityID is wrong");
 	}
 
-	@Override
-	public Activity deleteActivity(int activityId) throws ActivityException {
-		return activityDao.findById(activityId).orElseThrow(() -> new ActivityException("Entered ActivityID is wrong"));
-	}
 
 	@Override
 	public List<Activity> viewChargesOfActivities(Double charges) throws ActivityException {
@@ -61,6 +58,17 @@ public class ActivityServiceImpl implements ActivityService{
 		}
 		
 		else return activities;
+	}
+
+	@Override
+	public List<ActivityDTO> getAllActivityDetails() {
+		
+		List<ActivityDTO> activityDTOs = activityRepository.getOnlyActivityDetails();
+		
+		if(activityDTOs.isEmpty()) throw new ActivityException("No Record Found");
+		
+		else return activityDTOs;
+		
 	}
 
 }

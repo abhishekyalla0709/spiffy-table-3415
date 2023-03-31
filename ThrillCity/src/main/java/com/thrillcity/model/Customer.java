@@ -27,8 +27,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @ToString
 @Entity
 public class Customer{
@@ -37,16 +37,15 @@ public class Customer{
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Integer customerID;
 		
-		@NotNull
+		@NotNull(message = "please provide address")
 		private String address;
 		
-//		@Size(min = 10, message = "Mobile Number should be of 10 digits!")
+		@Size(min = 10, message = "Mobile Number should be of 10 digits!")
 		private String mobileNumber;
 		
 		@Email
 		private String email;
-		
-		@Past(message="Please provide valid  date of birth")
+  
 		private LocalDate dob;
 		
 		@OneToOne(cascade = CascadeType.ALL)
@@ -119,6 +118,15 @@ public class Customer{
 			super();
 			// TODO Auto-generated constructor stub
 		}
+
+		public LocalDate getDob() {
+			return dob;
+		}
+
+		public void setDob(LocalDate dob) {
+			this.dob = dob;
+		}
+		
 		
 		
 		
