@@ -22,6 +22,4 @@ public class GlobalExceptionHandler {
 		myerrordetails.setDetails(wr.getDescription(false));
 		return new ResponseEntity<MyErrorDetails>(myerrordetails, HttpStatus.NOT_FOUND);
 	}
-	
-	
 }

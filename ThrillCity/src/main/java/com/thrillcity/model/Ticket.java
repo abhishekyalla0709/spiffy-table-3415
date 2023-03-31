@@ -20,6 +20,16 @@ public class Ticket {
 	private Double balance = 200.0;
 	
 	private LocalDateTime dateTime = LocalDateTime.now();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Getters and Setters
 
 	public Integer getTicketId() {
 		return ticketId;

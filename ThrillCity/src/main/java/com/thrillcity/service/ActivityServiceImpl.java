@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.model.Activity;
+import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Customer;
 import com.thrillcity.repository.ActivityRepository;
 
@@ -48,8 +49,24 @@ public class ActivityServiceImpl implements ActivityService{
 	}
 
 	@Override
-	public Activity deleteActivity(int activityId) throws ActivityException {
-		return activityRepository.findById(activityId).orElseThrow(() -> new ActivityException("Entered ActivityID is wrong"));
+	public Activity deleteActivity(Integer activityId) throws ActivityException {
+		
+//		return activityRepository.findById(activityId).orElseThrow(() -> new ActivityException("Not found with id: "+activityId));
+		
+		Optional<Activity> optional = activityRepository.findById(activityId);
+		
+		if(optional.isPresent()) {
+			
+			Activity activity = optional.get();
+			
+			activityRepository.delete(activity);
+			
+			return activity;
+			
+		}
+		
+		else throw new ActivityException("Not found id: "+activityId);
+		
 	}
 
 	@Override
@@ -61,6 +78,17 @@ public class ActivityServiceImpl implements ActivityService{
 		}
 		
 		else return activities;
+	}
+
+	@Override
+	public List<ActivityDTO> getAllActivityDetails() {
+		
+		List<ActivityDTO> activityDTOs = activityRepository.getOnlyActivityDetails();
+		
+		if(activityDTOs.isEmpty()) throw new ActivityException("No Record Found");
+		
+		else return activityDTOs;
+		
 	}
 
 }
