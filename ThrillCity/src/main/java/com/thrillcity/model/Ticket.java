@@ -20,4 +20,43 @@ public class Ticket {
 	private Double balance = 200.0;
 	
 	private LocalDateTime dateTime = LocalDateTime.now();
+
+	public Integer getTicketId() {
+		return ticketId;
+	}
+
+	public void setTicketId(Integer ticketId) {
+		this.ticketId = ticketId;
+	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	public Ticket() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Ticket(Integer ticketId, Double balance, LocalDateTime dateTime) {
+		super();
+		this.ticketId = ticketId;
+		this.balance = balance;
+		this.dateTime = dateTime;
+	}
+	
+	
+	
 }

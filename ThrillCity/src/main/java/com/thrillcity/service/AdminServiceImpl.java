@@ -27,8 +27,6 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private ActivityRepository activityRepository;
 	
-	@Autowired
-	private Activity ac;
 	
 	@Override
 	public Admin insertAdmin(Admin admin) {
