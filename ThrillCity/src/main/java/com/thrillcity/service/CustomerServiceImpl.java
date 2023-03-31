@@ -82,7 +82,7 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public Activity getCustomerActivity(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException {
+	public List<Activity> getCustomerActivity(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException {
 		// TODO Auto-generated method stub
 		return null;
 	}
