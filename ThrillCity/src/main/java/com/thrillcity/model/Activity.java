@@ -37,9 +37,88 @@ public class Activity{
 	@Min(value = 1)
 	private Integer capacity;
 	
-	
-	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "activities")
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Customer> customers = new ArrayList<>();
+
+
+	public Integer getActivityid() {
+		return Activityid;
+	}
+
+
+	public void setActivityid(Integer activityid) {
+		Activityid = activityid;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public Double getCharges() {
+		return charges;
+	}
+
+
+	public void setCharges(Double charges) {
+		this.charges = charges;
+	}
+
+
+	public Integer getAge() {
+		return age;
+	}
+
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+
+
+	public Activity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Activity(Integer activityid, String description, @Min(100) Double charges, Integer age,
+			@Min(1) Integer capacity, List<Customer> customers) {
+		super();
+		Activityid = activityid;
+		this.description = description;
+		this.charges = charges;
+		this.age = age;
+		this.capacity = capacity;
+		this.customers = customers;
+	}
+	
 	
 	
 }

@@ -44,11 +44,78 @@ public class Customer{
 		@Email
 		private String email;
 		
-//		@OneToOne(cascade = CascadeType.ALL)
-//		private Ticket tickets;
+		@OneToOne(cascade = CascadeType.ALL)
+		private Ticket tickets;
 		
-		@JsonIgnore
-		@ManyToMany(cascade = CascadeType.ALL)
+		
+		@ManyToMany(cascade = CascadeType.ALL,mappedBy = "customers")
 		private List<Activity> activities = new ArrayList<>();
+
+		public Integer getCustomerID() {
+			return customerID;
+		}
+
+		public void setCustomerID(Integer customerID) {
+			this.customerID = customerID;
+		}
+
+		public String getAddress() {
+			return address;
+		}
+
+		public void setAddress(String address) {
+			this.address = address;
+		}
+
+		public String getMobileNumber() {
+			return mobileNumber;
+		}
+
+		public void setMobileNumber(String mobileNumber) {
+			this.mobileNumber = mobileNumber;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public Ticket getTickets() {
+			return tickets;
+		}
+
+		public void setTickets(Ticket tickets) {
+			this.tickets = tickets;
+		}
+
+		public List<Activity> getActivities() {
+			return activities;
+		}
+
+		public void setActivities(List<Activity> activities) {
+			this.activities = activities;
+		}
+
+		public Customer(Integer customerID, @NotNull String address, String mobileNumber, @Email String email,
+				Ticket tickets, List<Activity> activities) {
+			super();
+			this.customerID = customerID;
+			this.address = address;
+			this.mobileNumber = mobileNumber;
+			this.email = email;
+			this.tickets = tickets;
+			this.activities = activities;
+		}
+
+		public Customer() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		
+		
+		
 
 }

@@ -19,6 +19,7 @@ import com.thrillcity.model.Admin;
 import com.thrillcity.model.Customer;
 import com.thrillcity.repository.CustomerRepository;
 import com.thrillcity.service.AdminService;
+import com.thrillcity.service.CustomerService;
 
 @RestController
 public class AdminController {
@@ -27,7 +28,7 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@Autowired
-	private CustomerRepository customerRepsoitory;
+	private CustomerService cutomerService;
 
 	@PostMapping("/admins")
 	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin){
@@ -50,4 +51,12 @@ public class AdminController {
 //		customerRepsoitory.save(c);
 //		return new ResponseEntity<>(c, HttpStatus.ACCEPTED);
 //	}
+	
+	@GetMapping("/customers/{id}")
+	public ResponseEntity<List<Activity>> getAllActivtiesOfACustomer(@PathVariable Integer id){
+		
+		List<Activity> activities = adminService.getAllActivities(id);
+		
+		return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
+	}
 }
