@@ -46,7 +46,7 @@ public class ActivityController {
 		return new ResponseEntity<>(activ,HttpStatus.OK);
 	}
 	
-	@GetMapping("/activities{charges}")
+	@GetMapping("/activities/{charges}")
 	public ResponseEntity<List<Activity>> viewActivitiesByChargesHandler(@PathVariable Double charges){
 		List<Activity> activities = activityService.viewChargesOfActivities(charges);
 		
