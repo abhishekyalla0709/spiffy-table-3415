@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(myerrordetails, HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler
 	public ResponseEntity<MyErrorDetails> customerException(CustomerException customerException, WebRequest wr){
 		MyErrorDetails myerrordetails = new MyErrorDetails();
 		myerrordetails.setTimeStamp(LocalDateTime.now());
