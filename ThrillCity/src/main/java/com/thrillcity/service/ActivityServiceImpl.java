@@ -55,14 +55,15 @@ public class ActivityServiceImpl implements ActivityService{
 		
 		Optional<Activity> optional = activityRepository.findById(activityId);
 		
+		
+		
 		if(optional.isPresent()) {
 			
 			Activity activity = optional.get();
 			
 			activityRepository.delete(activity);
 			
-			return activity;
-			
+			return activity;			
 		}
 		
 		else throw new ActivityException("Not found id: "+activityId);
