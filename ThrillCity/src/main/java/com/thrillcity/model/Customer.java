@@ -45,7 +45,8 @@ public class Customer{
 		
 		@Email
 		private String email;
-  
+		
+		
 		private LocalDate dob;
 		
 		private String password;
