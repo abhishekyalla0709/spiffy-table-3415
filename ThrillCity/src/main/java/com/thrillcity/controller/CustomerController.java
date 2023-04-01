@@ -1,9 +1,13 @@
 package com.thrillcity.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,12 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.model.Customer;
+import com.thrillcity.model.CustomerDTO;
 import com.thrillcity.service.CustomerService;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.AssertFalse.List;
 
 @RestController
 public class CustomerController {
@@ -46,10 +48,17 @@ public class CustomerController {
 		return new ResponseEntity<>(customer,HttpStatus.OK);
 	}
 	
-	@PutMapping("/customers/{customerId}/{activityId}")
+	@PutMapping("/customers/{sessionId}/{activityId}")
 	public ResponseEntity<Customer> useAnActivity(@PathVariable Integer customerId, @PathVariable Integer activityId){
 		Customer c = customerService.useActivity(customerId, activityId);
 		return new ResponseEntity<Customer>(c, HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/customersbwdates/{d1}/{d2}")
+	public ResponseEntity<List<CustomerDTO>> listOfCustomers(@PathVariable LocalDate d1, @PathVariable LocalDate d2){
+		List<CustomerDTO> listcust= customerService.listOfCustomers(d1, d2);
+		return new ResponseEntity<>(listcust, HttpStatus.OK);
+		
 	}
 	
 	

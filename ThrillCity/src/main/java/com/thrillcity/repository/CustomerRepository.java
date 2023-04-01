@@ -1,5 +1,6 @@
 package com.thrillcity.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,8 @@ import com.thrillcity.model.CustomerDTO;
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	
 	
-	@Query("select c.activities from customer c where c.customerid = :customerid AND c.tickets.dateTime IS BETWEEN :forDate AND :toDate")
-	public List<Activity> getActivitiesForDays();
+	@Query("select new com.thrillcity.model.CustomerDTO(customerId,address,email,dob) from customer where tickets.dateTime IS BETWEEN =?1 AND =?2")
+	public List<CustomerDTO> getCustomerForDays(LocalDate d1, LocalDate d2);
 	
 	@Query("select new com.thrillcity.model.CustomerDTO(customerId,address,email,dob) from Customer where customerId=?1")
 	public Optional<CustomerDTO> getCustomerAllDetails( Integer customerId) throws CustomerException;

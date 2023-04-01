@@ -13,6 +13,7 @@ import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.exceptions.TicketException;
 import com.thrillcity.model.Activity;
+import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Customer;
 import com.thrillcity.model.CustomerDTO;
 import com.thrillcity.repository.ActivityRepository;
@@ -93,22 +94,13 @@ public class CustomerServiceImpl implements CustomerService{
 	
 
 	@Override
-	public List<Activity> getAllActivities() throws ActivityException {
+	public List<ActivityDTO> getAllActivities() throws ActivityException {
 		
-		List<Activity> list = activityRepository.findAll();
+		List<ActivityDTO> list = activityRepository.getOnlyActivityDetails();
 		if(list == null) {
 			throw new ActivityException("No activities found.");
 		}
 		return list;
-	}
-
-	
-
-	@Override
-	public List<Activity> getCustomerActivity(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException {
-		
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	
@@ -136,5 +128,14 @@ public class CustomerServiceImpl implements CustomerService{
 			throw new TicketException("Insufficenet funds in the ticket");
 		}
 		return c;
+	}
+
+
+	@Override
+	public List<CustomerDTO> listOfCustomers(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException {
+		
+		List<CustomerDTO> custdtos= customerRepository.getCustomerForDays(d1, d2);
+		if(custdtos.isEmpty()) throw new CustomerException("No customer found between these dates");
+		return custdtos;
 	}
 }
