@@ -14,9 +14,11 @@ import com.thrillcity.model.Activity;
 import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Admin;
 import com.thrillcity.model.Customer;
+import com.thrillcity.model.UserSession;
 import com.thrillcity.repository.ActivityRepository;
 import com.thrillcity.repository.AdminRepository;
 import com.thrillcity.repository.CustomerRepository;
+import com.thrillcity.repository.UserSessionRepository;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -29,6 +31,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private ActivityRepository activityRepository;
+	
+	@Autowired
+	private UserSessionRepository userSessionRepository;
 
 	@Override
 	public Admin insertAdmin(Admin admin) throws AdminException {
@@ -95,6 +100,29 @@ public class AdminServiceImpl implements AdminService{
 		return activities;
 	}
 
+	@Override
+	public String updateCustTickBal(String sessionId, Double amount) throws CustomerException {
+		
+		UserSession user = userSessionRepository.findBySessionId(sessionId);
+		
+		if(user==null) throw new CustomerException("No record found for sessionID: "+sessionId);
+				
+		Integer uid = user.getId();
+		
+		Optional<Customer> opt = customerRepository.findById(uid);
+			
+			Customer customer = opt.get();
+			
+			Double prevamt = customer.getTickets().getBalance();
+			
+			customer.getTickets().setBalance(prevamt + amount);
+			
+			customerRepository.save(customer);
+			
+			return "updated Balance: "+ customer.getTickets().getBalance() ;
+		
+		
+	}
 	
 	
 

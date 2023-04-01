@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,4 +60,14 @@ public class AdminController {
 		
 		return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
 	}
+	
+	
+	@PatchMapping("/updateTicketBalance/{sid}/{amount}")
+	public ResponseEntity<String> updateBalCustTicket(@PathVariable String sid,@PathVariable Double amount){
+			
+			String bal = adminService.updateCustTickBal(sid, amount);
+			
+			return new ResponseEntity<>(bal,HttpStatus.ACCEPTED);
+			
+		}
 }
