@@ -22,10 +22,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	public Optional<CustomerDTO> getCustomerAllDetails( Integer customerId) throws CustomerException;
 	
 	@Query("select new com.thrillcity.model.CustomerDTO(customerId,address,email,dob) from Customer")
-	public List<CustomerDTO> getAllCustomer() throws CustomerException;
-	
-	
-	
-	
+	public List<CustomerDTO> getAllCustomer() throws CustomerException;	
 
 }

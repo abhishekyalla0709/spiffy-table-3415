@@ -24,6 +24,7 @@ public interface AdminService {
 	
 	public List<ActivityDTO> getAllActivities() throws ActivityException;
 	
+	public String updateCustTickBal(String sessionId, Double amount)throws CustomerException;
 	
 	
 }

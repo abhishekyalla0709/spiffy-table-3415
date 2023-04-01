@@ -7,5 +7,7 @@ import com.thrillcity.model.UserSession;
 
 @Repository
 public interface UserSessionRepository extends JpaRepository<UserSession, Integer>{
-
+	
+	public UserSession findBySessionId(String sessionid);
+	
 }
