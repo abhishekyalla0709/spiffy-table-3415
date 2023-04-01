@@ -31,4 +31,26 @@ public class GlobalExceptionHandler {
 		myerrordetails.setDetails(wr.getDescription(false));
 		return new ResponseEntity<MyErrorDetails>(myerrordetails, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler
+	public ResponseEntity<MyErrorDetails> activityException(ActivityException activityException, WebRequest wr){
+		MyErrorDetails myerrordetails = new MyErrorDetails();
+		myerrordetails.setTimeStamp(LocalDateTime.now());
+		myerrordetails.setMsg(activityException.getMessage());
+		myerrordetails.setDetails(wr.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(myerrordetails, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<MyErrorDetails> ticketException(TicketException ticketException, WebRequest wr){
+		MyErrorDetails myerrordetails = new MyErrorDetails();
+		myerrordetails.setTimeStamp(LocalDateTime.now());
+		myerrordetails.setMsg(ticketException.getMessage());
+		myerrordetails.setDetails(wr.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(myerrordetails, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	
 }

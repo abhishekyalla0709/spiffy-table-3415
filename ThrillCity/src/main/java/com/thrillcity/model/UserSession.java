@@ -1,17 +1,16 @@
 package com.thrillcity.model;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class dummyloginsession {
+public class UserSession {
 
 	@Id
 	private Integer id;
 	
-	private String token;
+	private String sessionId;
 	
 	private LocalDateTime logintime;
 
@@ -23,12 +22,12 @@ public class dummyloginsession {
 		this.id = id;
 	}
 
-	public String getToken() {
-		return token;
+	public String getSessionId() {
+		return sessionId;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 
 	public LocalDateTime getLogintime() {
@@ -39,21 +38,16 @@ public class dummyloginsession {
 		this.logintime = logintime;
 	}
 
-	public dummyloginsession(Integer id, String token, LocalDateTime logintime) {
-		super();
-		this.id = id;
-		this.token = token;
-		this.logintime = logintime;
-	}
-
-	public dummyloginsession() {
+	public UserSession() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "dummyloginsession [id=" + id + ", token=" + token + ", logintime=" + logintime + "]";
+	public UserSession(Integer id, String sessionId, LocalDateTime logintime) {
+		super();
+		this.id = id;
+		this.sessionId = sessionId;
+		this.logintime = logintime;
 	}
 	
 	

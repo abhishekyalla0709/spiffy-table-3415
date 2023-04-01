@@ -11,6 +11,7 @@ import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.AdminException;
 import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.model.Activity;
+import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Admin;
 import com.thrillcity.model.Customer;
 import com.thrillcity.repository.ActivityRepository;
@@ -86,8 +87,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<Activity> getAllActivities() throws ActivityException {
-		List<Activity> activities = activityRepository.findAll();
+	public List<ActivityDTO> getAllActivities() throws ActivityException {
+		List<ActivityDTO> activities = activityRepository.getOnlyActivityDetails();
 		if(activities.size()==0) {
 			throw new ActivityException("no activity is found");
 		}
