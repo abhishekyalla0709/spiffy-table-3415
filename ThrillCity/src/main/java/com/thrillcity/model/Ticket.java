@@ -22,13 +22,6 @@ public class Ticket {
 	private LocalDateTime dateTime = LocalDateTime.now();
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	// Getters and Setters
 
 	public Integer getTicketId() {
