@@ -7,11 +7,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.Customer;
+import com.thrillcity.model.CustomerDTO;
 import com.thrillcity.repository.ActivityRepository;
 import com.thrillcity.repository.CustomerRepository;
 
@@ -23,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService{
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	@Autowired
 	private ActivityRepository activityRepository;
 	
 	@Override
@@ -35,31 +38,58 @@ public class CustomerServiceImpl implements CustomerService{
 		Customer customer2 = customerRepository.save(customer);
 		return customer2;
 	}
+	
 
 	@Override
-	public Customer updateCustomer(Customer customer) throws CustomerException {
+	public Customer updateCustomer(Integer customerId, String address, String mobileNumber, String email) throws CustomerException {
 		
-		Optional<Customer> opt = customerRepository.findById(customer.getCustomerID());
-		if (opt.isPresent()) {
-			Customer updateCustomer = customerRepository.save(customer);
-			return updateCustomer;
-		} else {
-			throw new CustomerException(" Customer Does Not Exist ! ");
+		Optional<Customer> opt = customerRepository.findById(customerId);
+		
+		if(opt.isPresent()) {
+			
+			Customer cust = opt.get();
+			cust.setAddress(address);
+			cust.setMobileNumber(mobileNumber);
+			cust.setEmail(email);
+			customerRepository.save(cust);
+			return cust;
 		}
+		else throw new CustomerException("Customer not found: "+customerId);
 	}
+	
 
 	@Override
-	public String deleteCustomer(Integer customerID) throws CustomerException {
+	public Customer deleteCustomer(Integer customerID) throws CustomerException {
 		
 		Optional<Customer> opt = customerRepository.findById(customerID);
-
 		if (opt.isPresent()) {
-			customerRepository.delete(opt.get());
-			return "Deletion successful!";
+			Customer customer = opt.get();
+			customerRepository.delete(customer);
+			return customer;
 		} else {
 			throw new CustomerException("No customer found with the ID:" + customerID);
 		}
 	}
+	
+	@Override
+	public CustomerDTO getCustomerAllDetails(Integer customerId) throws CustomerException {
+		
+		Optional<CustomerDTO> custDTO= customerRepository.getCustomerAllDetails(customerId);
+		if(custDTO.isEmpty()) throw new CustomerException("Customer not available with this id = "+ customerId);
+		CustomerDTO cdto= custDTO.get();
+		return cdto;
+	}
+	
+	
+	@Override
+	public List<CustomerDTO> getAllCustomer() throws CustomerException {
+		
+		List<CustomerDTO> custDtos= customerRepository.getAllCustomer();
+		if(custDtos.isEmpty()) throw new CustomerException("Record not found");
+		return custDtos;
+	}
+	
+	
 
 	@Override
 	public List<Activity> getAllActivities() throws ActivityException {
@@ -71,21 +101,16 @@ public class CustomerServiceImpl implements CustomerService{
 		return list;
 	}
 
-	@Override
-	public Customer getCustomerById(Integer customerId) throws CustomerException {
-		
-		Optional<Customer> cus = customerRepository.findById(customerId);
-		
-		if(cus == null) throw new CustomerException("customer is not available with this id");
-		Customer customer= cus.get();
-		return customer;
-	}
+	
 
 	@Override
 	public List<Activity> getCustomerActivity(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException {
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 	@Override
 	public Customer useActivity(Integer customerId, Integer activityId) throws CustomerException, ActivityException {
@@ -108,5 +133,4 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 		return c;
 	}
-
 }

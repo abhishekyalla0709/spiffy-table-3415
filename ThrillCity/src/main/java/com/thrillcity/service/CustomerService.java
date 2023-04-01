@@ -7,15 +7,17 @@ import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.Customer;
+import com.thrillcity.model.CustomerDTO;
 
 public interface CustomerService {
 	
 	public Customer registerCustomer(Customer customer) throws CustomerException;
-	public Customer updateCustomer(Customer customer) throws CustomerException;
-	public String deleteCustomer(Integer customerID) throws CustomerException;
+	public Customer updateCustomer(Integer customerId, String address, String mobileNumber, String email) throws CustomerException;
+	public Customer deleteCustomer(Integer customerID) throws CustomerException;
+	public CustomerDTO getCustomerAllDetails(Integer customerId) throws CustomerException;
+	public List<CustomerDTO> getAllCustomer() throws CustomerException;
 	public List<Activity> getAllActivities() throws ActivityException;
 	public List<Activity> getCustomerActivity(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException;
-	public Customer getCustomerById(Integer customerId) throws CustomerException;
 	public Customer useActivity(Integer customerId, Integer activityId) throws CustomerException, ActivityException;
 
 }
