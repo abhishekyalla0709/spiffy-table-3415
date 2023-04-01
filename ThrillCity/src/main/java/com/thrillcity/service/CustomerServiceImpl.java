@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.CustomerException;
+import com.thrillcity.exceptions.TicketException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.Customer;
 import com.thrillcity.model.CustomerDTO;
@@ -130,6 +131,9 @@ public class CustomerServiceImpl implements CustomerService{
 			a.getCustomers().add(c);
 			c.getTickets().setBalance(bal - a.getCharges());
 			customerRepository.save(c);
+		}
+		else {
+			throw new TicketException("Insufficenet funds in the ticket");
 		}
 		return c;
 	}

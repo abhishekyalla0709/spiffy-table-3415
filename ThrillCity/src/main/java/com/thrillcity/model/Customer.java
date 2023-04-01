@@ -49,6 +49,8 @@ public class Customer{
 		
 		private LocalDate dob;
 		
+		private String password;
+		
 		@OneToOne(cascade = CascadeType.ALL)
 		private Ticket tickets;
 		
@@ -126,6 +128,14 @@ public class Customer{
 
 		public void setDob(LocalDate dob) {
 			this.dob = dob;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
 		}
 		
 		

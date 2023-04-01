@@ -7,6 +7,7 @@ import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.AdminException;
 import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.model.Activity;
+import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Admin;
 
 public interface AdminService {
@@ -21,6 +22,8 @@ public interface AdminService {
 	
 	public List<Activity> getAllActivities(Integer customer_id) throws ActivityException, CustomerException;
 	
-	public List<Activity> getAllActivities() throws ActivityException;
+	public List<ActivityDTO> getAllActivities() throws ActivityException;
+	
+	
 	
 }
