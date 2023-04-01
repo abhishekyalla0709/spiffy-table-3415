@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.thrillcity.exceptions.ActivityException;
 import com.thrillcity.exceptions.CustomerException;
+import com.thrillcity.exceptions.TicketException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.Customer;
 import com.thrillcity.repository.ActivityRepository;
@@ -23,6 +24,7 @@ public class CustomerServiceImpl implements CustomerService{
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	@Autowired
 	private ActivityRepository activityRepository;
 	
 	@Override
@@ -105,6 +107,9 @@ public class CustomerServiceImpl implements CustomerService{
 			a.getCustomers().add(c);
 			c.getTickets().setBalance(bal - a.getCharges());
 			customerRepository.save(c);
+		}
+		else {
+			throw new TicketException("Insufficenet funds in the ticket");
 		}
 		return c;
 	}

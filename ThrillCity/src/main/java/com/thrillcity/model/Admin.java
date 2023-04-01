@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Admin extends User{
+public class Admin{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,12 @@ public class Admin extends User{
 	
 	@Embedded
 	private Address address;
+	
+	private String username;
+	
+	private String phonenumber;
+	
+	private String password;
 
 	public Integer getAdmin_id() {
 		return admin_id;
@@ -46,14 +52,39 @@ public class Admin extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(Integer admin_id, String email, Address address) {
+	public Admin(Integer admin_id, String email, Address address, String username, String phonenumber,
+			String password) {
 		super();
 		this.admin_id = admin_id;
 		this.email = email;
 		this.address = address;
+		this.username = username;
+		this.phonenumber = phonenumber;
+		this.password = password;
 	}
-	
-	
-	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }
