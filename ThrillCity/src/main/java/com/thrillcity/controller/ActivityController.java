@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,13 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.ActivityDTO;
+import com.thrillcity.model.Customer;
 import com.thrillcity.service.ActivityService;
+import com.thrillcity.service.ActivityServiceImpl;
+import com.thrillcity.service.CustomerService;
+import com.thrillcity.service.CustomerServiceImpl;
 
 @RestController
 public class ActivityController {
 	
 	@Autowired
 	private ActivityService activityService;
+	
+	@Autowired
+	private ActivityServiceImpl  activityServiceImpl;
 	
 	@PostMapping("/activities")
 	public ResponseEntity<Activity> registerActivityHandler(@RequestBody Activity activity){
@@ -61,6 +69,7 @@ public class ActivityController {
 		return new ResponseEntity<>(activityDTOs,HttpStatus.OK);
 		
 	}
+	
 	
 	
 }

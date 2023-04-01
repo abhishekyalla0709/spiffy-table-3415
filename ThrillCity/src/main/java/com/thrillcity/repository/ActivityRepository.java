@@ -17,4 +17,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer>{
 	
 	@Query("select new com.thrillcity.model.ActivityDTO(activityid, description,charges,age,capacity) from Activity" )
 	public List<ActivityDTO> getOnlyActivityDetails();
+	
+	
 }
