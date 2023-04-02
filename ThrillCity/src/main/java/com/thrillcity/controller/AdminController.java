@@ -62,7 +62,7 @@ public class AdminController {
 		return new ResponseEntity<Admin>(a, HttpStatus.OK);
 	}
 	
-	@GetMapping("/customers/{id}")
+	@GetMapping("/customeractivities/{id}")
 	public ResponseEntity<List<Activity>> getAllActivtiesOfACustomer(@PathVariable Integer id){
 		
 		List<Activity> activities = adminService.getAllActivities(id);
@@ -80,7 +80,7 @@ public class AdminController {
 			
 		}
 	
-	@GetMapping("/getact")
+	@GetMapping("/getallactivities")
 	public ResponseEntity<List<ActivityDTO>> getActivDetails(){
 		
 		List<ActivityDTO> activityDTOs = activityService.getAllActivityDetails();
