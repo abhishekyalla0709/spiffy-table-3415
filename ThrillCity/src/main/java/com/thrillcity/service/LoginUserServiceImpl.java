@@ -33,61 +33,67 @@ public class LoginUserServiceImpl implements LoginUserService{
 	@Override
 	public String loginUser(LoginUser loginuser) {
 		String type = loginuser.getUserType();
-		Integer id = loginuser.getId();
+		String mobileNumber = loginuser.getMobileNumber();
 		if(type.equalsIgnoreCase("customer")) {
-			Optional<Customer> opt = customerRepository.findById(id);
-			if(opt.isEmpty()) {
-				throw new CustomerException("customer not found with id " + id);
+			Customer c = customerRepository.findBymobileNumber(mobileNumber);
+			if(c==null) {
+				throw new CustomerException("customer not found with mobileNumber " + mobileNumber);
 			}
-			Customer c = opt.get();
 			if(c.getPassword().equalsIgnoreCase(loginuser.getPassword())==false) {
 				throw new CustomerException("Incorrect password");
 			}
 			
-			Optional<UserSession> opt2 = userSessionRepository.findById(id);
+			Optional<UserSession> opt2 = userSessionRepository.findById(mobileNumber);
 			if(opt2.isPresent() && opt2.get().getType().equalsIgnoreCase(type)) {
 				throw new CustomerException("Already logged in");
 			}
 			
 			String sessionId = RandomString.make(5);
 			
-			UserSession us = new UserSession(id, sessionId, LocalDateTime.now(),type);
-			
+			UserSession us = new UserSession();
+			us.setSessionPassKey(sessionId);
+			us.setPhoneNumber(mobileNumber);
+			us.setLogintime(LocalDateTime.now());
+			us.setType(type);
 			userSessionRepository.save(us);
 			return sessionId;
 		}
 		else {
-			Optional<Admin> opt = adminRepository.findById(id);
-			if(opt.isEmpty()) {
-				throw new AdminException("customer not found with id " + id);
+			Admin a = adminRepository.findByphonenumber(mobileNumber);
+			if(a==null) {
+				throw new AdminException("admin not found with mobileNumber " + mobileNumber);
 			}
-		    Admin a = opt.get();
 			if(a.getPassword().equalsIgnoreCase(loginuser.getPassword())==false) {
-				throw new AdminException("Incorrect password");
+				throw new CustomerException("Incorrect password");
 			}
 			
-			Optional<UserSession> opt2 = userSessionRepository.findById(id);
+			Optional<UserSession> opt2 = userSessionRepository.findById(mobileNumber);
 			if(opt2.isPresent() && opt2.get().getType().equalsIgnoreCase(type)) {
-				throw new AdminException("Already logged in");
+				throw new CustomerException("Already logged in");
 			}
 			
 			String sessionId = RandomString.make(5);
 			
-			UserSession us = new UserSession(id, sessionId, LocalDateTime.now(), type);
-			
+			UserSession us = new UserSession();
+			us.setSessionPassKey(sessionId);
+			us.setPhoneNumber(mobileNumber);
+			us.setLogintime(LocalDateTime.now());
+			us.setType(type);
 			userSessionRepository.save(us);
 			return sessionId;
 		}
 	}
 
 	@Override
-	public String logoutUser(Integer id, String sessionId) {
+	public String logoutUser(String mobileNumber, String sessionId) {
 		UserSession us = userSessionRepository.findBySessionId(sessionId);
 		if(us==null) {
-			throw new CustomerException("user not found with id " + id);
+			throw new CustomerException("user not found with sessioId " + sessionId);
 		}
 		userSessionRepository.delete(us);
 		return "successfully logged out";
 	}
+
+	
 
 }

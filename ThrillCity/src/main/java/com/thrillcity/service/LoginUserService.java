@@ -6,7 +6,7 @@ public interface LoginUserService {
 	
 	public String loginUser(LoginUser loginuser);
 	
-	public String logoutUser(Integer id, String sessionId);
+	public String logoutUser(String mobileNumber, String sessionId);
 	
 	
 }
