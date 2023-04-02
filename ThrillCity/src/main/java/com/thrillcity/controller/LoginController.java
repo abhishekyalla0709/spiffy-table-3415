@@ -24,9 +24,9 @@ public class LoginController {
 		return new ResponseEntity<String>(passcode, HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/users/logout/{id}/{passcode}")
-	public ResponseEntity<String> userLogout(@PathVariable Integer id, @PathVariable String passcode){
-		String s = loginUserService.logoutUser(id, passcode);
+	@DeleteMapping("/users/logout/{mobileNumber}/{passcode}")
+	public ResponseEntity<String> userLogout(@PathVariable String mobileNumber, @PathVariable String passcode){
+		String s = loginUserService.logoutUser(mobileNumber, passcode);
 		return new ResponseEntity<String>(s, HttpStatus.ACCEPTED);
 	}
 
