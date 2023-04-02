@@ -115,11 +115,11 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer useActivity(String sessionId, Integer activityId) throws CustomerException, ActivityException {
 		UserSession us = userSessionRepository.findBySessionId(sessionId);
 		
-		Optional<Customer> opt = customerRepository.findById(us.getId());
-		if(opt.isPresent() == false) {
+		if(us==null) {
 			throw new CustomerException("No customer found for this id " + sessionId);
 		}
-		Customer c = opt.get();
+		Customer c = customerRepository.findBymobileNumber(us.getPhoneNumber());
+		
 		Optional<Activity> opt2 = activityRepository.findById(activityId);
 		if(opt2.isPresent()==false) {
 			throw new ActivityException("No activity found for this id " + activityId);

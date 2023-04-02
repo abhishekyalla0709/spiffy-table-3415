@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.thrillcity.model.UserSession;
 
 @Repository
-public interface UserSessionRepository extends JpaRepository<UserSession, Integer>{
+public interface UserSessionRepository extends JpaRepository<UserSession, String>{
 	
 	public UserSession findBySessionId(String sessionid);
 	

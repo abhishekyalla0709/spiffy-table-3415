@@ -4,7 +4,7 @@ public class LoginUser {
 	
 	private String userType;
 	
-	private Integer id;
+	private String mobileNumber;
 	
 	private String password;
 
@@ -16,12 +16,12 @@ public class LoginUser {
 		this.userType = userType;
 	}
 
-	public Integer getId() {
-		return id;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
 	public String getPassword() {
@@ -37,12 +37,13 @@ public class LoginUser {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LoginUser(String userType, Integer id, String password) {
+	public LoginUser(String userType, String mobileNumber, String password) {
 		super();
 		this.userType = userType;
-		this.id = id;
+		this.mobileNumber = mobileNumber;
 		this.password = password;
 	}
-	
+
+		
 	
 }

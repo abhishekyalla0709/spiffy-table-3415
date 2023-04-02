@@ -107,11 +107,10 @@ public class AdminServiceImpl implements AdminService{
 		
 		if(user==null) throw new CustomerException("No record found for sessionID: "+sessionId);
 				
-		Integer uid = user.getId();
+		String mobileNumer = user.getPhoneNumber();
 		
-		Optional<Customer> opt = customerRepository.findById(uid);
+		Customer customer = customerRepository.findBymobileNumber(mobileNumer);
 			
-			Customer customer = opt.get();
 			
 			Double prevamt = customer.getTickets().getBalance();
 			

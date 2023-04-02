@@ -2,13 +2,15 @@ package com.thrillcity.model;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class UserSession {
 
 	@Id
-	private Integer id;
+	private String phoneNumber;
 	
 	private String sessionId;
 	
@@ -16,20 +18,36 @@ public class UserSession {
 	
 	private String type;
 
-	public Integer getId() {
-		return id;
+	public UserSession() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	
+
+	public UserSession(String phoneNumber, String sessionId, LocalDateTime logintime, String type) {
+		super();
+		this.phoneNumber = phoneNumber;
+		this.sessionId = sessionId;
+		this.logintime = logintime;
+		this.type = type;
 	}
 
-	public String getSessionId() {
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getSessionPassKey() {
 		return sessionId;
 	}
 
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
+	public void setSessionPassKey(String sessionPassKey) {
+		this.sessionId = sessionPassKey;
 	}
 
 	public LocalDateTime getLogintime() {
@@ -39,8 +57,6 @@ public class UserSession {
 	public void setLogintime(LocalDateTime logintime) {
 		this.logintime = logintime;
 	}
-	
-	
 
 	public String getType() {
 		return type;
@@ -50,19 +66,13 @@ public class UserSession {
 		this.type = type;
 	}
 
-	public UserSession() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "UserSession [userSessionId=" + ", phoneNumber=" + phoneNumber + ", sessionPassKey="
+				+ sessionId + ", logintime=" + logintime + ", type=" + type + "]";
 	}
 
-	public UserSession(Integer id, String sessionId, LocalDateTime logintime, String type) {
-		super();
-		this.id = id;
-		this.sessionId = sessionId;
-		this.logintime = logintime;
-		this.type = type;
-	}
-
+		
 	
 	
 	
