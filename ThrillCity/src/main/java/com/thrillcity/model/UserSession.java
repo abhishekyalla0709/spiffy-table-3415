@@ -13,6 +13,8 @@ public class UserSession {
 	private String sessionId;
 	
 	private LocalDateTime logintime;
+	
+	private String type;
 
 	public Integer getId() {
 		return id;
@@ -37,18 +39,31 @@ public class UserSession {
 	public void setLogintime(LocalDateTime logintime) {
 		this.logintime = logintime;
 	}
+	
+	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public UserSession() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserSession(Integer id, String sessionId, LocalDateTime logintime) {
+	public UserSession(Integer id, String sessionId, LocalDateTime logintime, String type) {
 		super();
 		this.id = id;
 		this.sessionId = sessionId;
 		this.logintime = logintime;
+		this.type = type;
 	}
+
+	
 	
 	
 }

@@ -45,13 +45,13 @@ public class LoginUserServiceImpl implements LoginUserService{
 			}
 			
 			Optional<UserSession> opt2 = userSessionRepository.findById(id);
-			if(opt2.isPresent()) {
+			if(opt2.isPresent() && opt2.get().getType().equalsIgnoreCase(type)) {
 				throw new CustomerException("Already logged in");
 			}
 			
 			String sessionId = RandomString.make(5);
 			
-			UserSession us = new UserSession(id, sessionId, LocalDateTime.now());
+			UserSession us = new UserSession(id, sessionId, LocalDateTime.now(),type);
 			
 			userSessionRepository.save(us);
 			return sessionId;
@@ -67,13 +67,13 @@ public class LoginUserServiceImpl implements LoginUserService{
 			}
 			
 			Optional<UserSession> opt2 = userSessionRepository.findById(id);
-			if(opt2.isPresent()) {
+			if(opt2.isPresent() && opt2.get().getType().equalsIgnoreCase(type)) {
 				throw new AdminException("Already logged in");
 			}
 			
 			String sessionId = RandomString.make(5);
 			
-			UserSession us = new UserSession(id, sessionId, LocalDateTime.now());
+			UserSession us = new UserSession(id, sessionId, LocalDateTime.now(), type);
 			
 			userSessionRepository.save(us);
 			return sessionId;
@@ -82,13 +82,9 @@ public class LoginUserServiceImpl implements LoginUserService{
 
 	@Override
 	public String logoutUser(Integer id, String sessionId) {
-		Optional<UserSession> opt2 = userSessionRepository.findById(id);
-		if(opt2.isPresent()==false) {
+		UserSession us = userSessionRepository.findBySessionId(sessionId);
+		if(us==null) {
 			throw new CustomerException("user not found with id " + id);
-		}
-		UserSession us = opt2.get();
-		if(us.getSessionId().equalsIgnoreCase(sessionId)==false) {
-			throw new CustomerException("Incorrect sessionId");
 		}
 		userSessionRepository.delete(us);
 		return "successfully logged out";

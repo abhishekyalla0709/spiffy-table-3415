@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class CustomerDTO {
 	
-	private Integer customerId;
+	private Integer customerID;
 	private String address;
 	private String mobileNumber;
 	private String email;
@@ -13,7 +13,7 @@ public class CustomerDTO {
 	
 	public CustomerDTO(Integer customerId, String address, String mobileNumber, String email, LocalDate dob) {
 		super();
-		this.customerId = customerId;
+		this.customerID = customerId;
 		this.address = address;
 		this.mobileNumber = mobileNumber;
 		this.email = email;
@@ -21,10 +21,10 @@ public class CustomerDTO {
 	}
 	
 	public Integer getCustomerId() {
-		return customerId;
+		return customerID;
 	}
 	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+		this.customerID = customerId;
 	}
 	public String getAddress() {
 		return address;
@@ -53,7 +53,7 @@ public class CustomerDTO {
 
 	@Override
 	public String toString() {
-		return "CustomerDTO [customerId=" + customerId + ", address=" + address + ", mobileNumber=" + mobileNumber
+		return "CustomerDTO [customerId=" + customerID + ", address=" + address + ", mobileNumber=" + mobileNumber
 				+ ", email=" + email + ", dob=" + dob + "]";
 	}
 	

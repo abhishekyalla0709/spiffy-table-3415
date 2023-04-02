@@ -12,8 +12,10 @@ import com.thrillcity.exceptions.CustomerException;
 import com.thrillcity.model.Activity;
 import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Customer;
+import com.thrillcity.model.UserSession;
 import com.thrillcity.repository.ActivityRepository;
 import com.thrillcity.repository.CustomerRepository;
+import com.thrillcity.repository.UserSessionRepository;
 
 @Service
 public class ActivityServiceImpl implements ActivityService{
@@ -24,14 +26,15 @@ public class ActivityServiceImpl implements ActivityService{
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	@Autowired
+	private UserSessionRepository userSessionRepository;
+	
 	@Override
-	public Activity insertActivity(Activity activity) throws ActivityException {
+	public Activity insertActivity(String sid,Activity activity) throws ActivityException {
 		
-		List<Customer> customers = activity.getCustomers();
-		
-		for(Customer customer:customers) {
-			
-			customer.getActivities().add(activity);
+		UserSession us = userSessionRepository.findBySessionId(sid);
+		if(us==null) {
+		throw new ActivityException("admins with session id not found");	
 		}
 		
 		Activity activ = activityRepository.save(activity);
@@ -40,7 +43,13 @@ public class ActivityServiceImpl implements ActivityService{
 	}
 
 	@Override
-	public Activity updateActivity(Activity activity) throws ActivityException {
+	public Activity updateActivity(String sid,Activity activity) throws ActivityException {
+		
+		UserSession us = userSessionRepository.findBySessionId(sid);
+		if(us==null) {
+		throw new ActivityException("admins with session id not found");	
+		}
+		
 		Optional<Activity> opt = activityRepository.findById(activity.getActivityid());
 		
 		if(opt.isPresent()) {
@@ -78,8 +87,7 @@ public class ActivityServiceImpl implements ActivityService{
 	}
 
 	@Override
-	public Activity deleteActivity(Integer activityId) throws ActivityException {
-		// TODO Auto-generated method stub
+	public Activity deleteActivity(String sid,Integer activityId) throws ActivityException {
 		return null;
 	}
 

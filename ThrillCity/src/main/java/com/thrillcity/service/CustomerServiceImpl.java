@@ -16,8 +16,11 @@ import com.thrillcity.model.Activity;
 import com.thrillcity.model.ActivityDTO;
 import com.thrillcity.model.Customer;
 import com.thrillcity.model.CustomerDTO;
+import com.thrillcity.model.Ticket;
+import com.thrillcity.model.UserSession;
 import com.thrillcity.repository.ActivityRepository;
 import com.thrillcity.repository.CustomerRepository;
+import com.thrillcity.repository.UserSessionRepository;
 
 import ch.qos.logback.core.joran.spi.ActionException;
 
@@ -29,6 +32,9 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	private ActivityRepository activityRepository;
+	
+	@Autowired
+	private UserSessionRepository userSessionRepository;
 	
 	@Override
 	public Customer registerCustomer(Customer customer) throws CustomerException {
@@ -106,10 +112,12 @@ public class CustomerServiceImpl implements CustomerService{
 	
 
 	@Override
-	public Customer useActivity(Integer customerId, Integer activityId) throws CustomerException, ActivityException {
-		Optional<Customer> opt = customerRepository.findById(customerId);
+	public Customer useActivity(String sessionId, Integer activityId) throws CustomerException, ActivityException {
+		UserSession us = userSessionRepository.findBySessionId(sessionId);
+		
+		Optional<Customer> opt = customerRepository.findById(us.getId());
 		if(opt.isPresent() == false) {
-			throw new CustomerException("No customer found for this id " + customerId);
+			throw new CustomerException("No customer found for this id " + sessionId);
 		}
 		Customer c = opt.get();
 		Optional<Activity> opt2 = activityRepository.findById(activityId);
@@ -134,8 +142,32 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public List<CustomerDTO> listOfCustomers(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException {
 		
-		List<CustomerDTO> custdtos= customerRepository.getCustomerForDays(d1, d2);
-		if(custdtos.isEmpty()) throw new CustomerException("No customer found between these dates");
-		return custdtos;
+		List<Customer> list = customerRepository.findAll();
+		
+		if(list.size() == 0) {
+			throw new CustomerException("no customer exist in the system");
+		}
+		
+		System.out.println(list);
+		
+		System.out.println(list.size());
+		List<CustomerDTO> list2 = new ArrayList<>();
+		
+		for(int i = 0; i < list.size(); i++) {
+			Ticket t = list.get(i).getTickets();
+			if(t.getDateTime().isAfter(d1.atStartOfDay()) && t.getDateTime().isBefore(d2.atStartOfDay())) {
+				Integer id = list.get(i).getCustomerID();
+				String email = list.get(i).getEmail();
+				String address = list.get(i).getAddress();
+				LocalDate dob = list.get(i).getDob();
+				String mobileNumber = list.get(i).getMobileNumber();
+				CustomerDTO cd = new CustomerDTO(id, address, mobileNumber, email, dob);
+				list2.add(cd);
+			}
+		}
+		
+		if(list2.isEmpty()) throw new CustomerException("No customer found between these dates");
+		System.out.println("\n" + list2);
+		return list2;
 	}
 }

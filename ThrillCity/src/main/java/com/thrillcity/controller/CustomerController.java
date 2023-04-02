@@ -49,8 +49,8 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/customers/{sessionId}/{activityId}")
-	public ResponseEntity<Customer> useAnActivity(@PathVariable Integer customerId, @PathVariable Integer activityId){
-		Customer c = customerService.useActivity(customerId, activityId);
+	public ResponseEntity<Customer> useAnActivity(@PathVariable String sessionId, @PathVariable Integer activityId){
+		Customer c = customerService.useActivity(sessionId, activityId);
 		return new ResponseEntity<Customer>(c, HttpStatus.ACCEPTED);
 	}
 	

@@ -45,7 +45,7 @@ public class Activity{
 
 
 	public void setActivityid(Integer activityid) {
-		activityid = activityid;
+		this.activityid = activityid;
 	}
 
 

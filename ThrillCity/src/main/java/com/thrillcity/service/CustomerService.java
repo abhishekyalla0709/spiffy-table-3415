@@ -19,6 +19,6 @@ public interface CustomerService {
 	public List<CustomerDTO> getAllCustomer() throws CustomerException;
 	public List<ActivityDTO> getAllActivities() throws ActivityException;
 	public List<CustomerDTO> listOfCustomers(LocalDate d1, LocalDate d2) throws CustomerException, ActivityException;
-	public Customer useActivity(Integer customerId, Integer activityId) throws CustomerException, ActivityException;
+	public Customer useActivity(String sessionId, Integer activityId) throws CustomerException, ActivityException;
 
 }

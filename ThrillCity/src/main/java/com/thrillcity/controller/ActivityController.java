@@ -31,25 +31,25 @@ public class ActivityController {
 	@Autowired
 	private ActivityServiceImpl  activityServiceImpl;
 	
-	@PostMapping("/activities")
-	public ResponseEntity<Activity> registerActivityHandler(@RequestBody Activity activity){
-		Activity activ = activityService.insertActivity(activity);
+	@PostMapping("/activities/{sid}")
+	public ResponseEntity<Activity> registerActivityHandler(@PathVariable String sid,@RequestBody Activity activity){
+		Activity activ = activityService.insertActivity(sid,activity);
 		
 		return new ResponseEntity<>(activ,HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/activities")
-	public ResponseEntity<Activity> updateActivityHandler(@RequestBody Activity activity){
-		Activity activ = activityService.updateActivity(activity);
+	@PutMapping("/activities/{sid}")
+	public ResponseEntity<Activity> updateActivityHandler(@PathVariable String sid,@RequestBody Activity activity){
+		Activity activ = activityService.updateActivity(sid,activity);
 		
 				
 		return new ResponseEntity<>(activ,HttpStatus.OK);
 	}
 	
 	
-	@DeleteMapping("/activities/{activityId}")
-	public ResponseEntity<Activity> deleteActivityHandler(@PathVariable Integer activityId){
-		Activity activ = activityService.deleteActivity(activityId);
+	@DeleteMapping("/activities/{sid}/{activityId}")
+	public ResponseEntity<Activity> deleteActivityHandler(@PathVariable String sid,@PathVariable Integer activityId){
+		Activity activ = activityService.deleteActivity(sid,activityId);
 		
 		return new ResponseEntity<>(activ,HttpStatus.OK);
 	}

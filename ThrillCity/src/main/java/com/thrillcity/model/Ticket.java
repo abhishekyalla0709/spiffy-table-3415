@@ -59,6 +59,11 @@ public class Ticket {
 		this.balance = balance;
 		this.dateTime = dateTime;
 	}
+
+	@Override
+	public String toString() {
+		return "Ticket [ticketId=" + ticketId + ", balance=" + balance + ", dateTime=" + dateTime + "]";
+	}
 	
 	
 	
