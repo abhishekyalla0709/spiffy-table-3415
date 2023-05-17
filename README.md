@@ -2,7 +2,7 @@
 
 * This is a backend application built using Spring Boot to handle the backend logic for an amusement park website. The application provides various endpoints for managing the park, rides, and visitors.
 
-![Amusement park image]( /AmusementPArk.jpg "Amusement Park")
+![Amusement park image]( /AmusementPark.jpeg "Amusement Park")
 
 
 <br>
