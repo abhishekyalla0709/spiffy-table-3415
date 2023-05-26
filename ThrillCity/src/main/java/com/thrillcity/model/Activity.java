@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,6 +29,8 @@ public class Activity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer activityid;
+	@NotNull
+	@NotBlank
 	private String description;
 	@Min(value = 100)
 	private Double charges;
