@@ -28,6 +28,7 @@
 # Entity Relationship Diagram
 
 ![ER Diagram image]( /ThrillCityER.png "Amusement Park")
+<img src = "ThrillCityER.png" alt = "er diagram"/>
 
 # Endpoints
 The application provides the following endpoints for managing the amusement park:
