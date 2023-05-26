@@ -27,7 +27,6 @@
 
 # Entity Relationship Diagram
 
-![ER Diagram image]( /ThrillCityER.png "Amusement Park")
 <img src = "ThrillCityER.png" alt = "er diagram"/>
 
 # Endpoints
